@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { Routes, Route, Outlet, Link } from "react-router-dom"
+import { Routes, Route, Outlet, Link, useRoutes } from "react-router-dom"
 import axios from 'axios'
 
 export const App = () => {
     const [isLogged, setIsLogged] = useState(false)
-    return(
-        <>
-        <div>
-          <h2>Home</h2>
-        </div>
+    let element = useRoutes([{path:"/", element:<Home isLogged={isLogged} />}])
+    return element
+    // return(
+    //     <>
+    //     <div>
+    //       <h2>Home</h2>
+    //     </div>
 
-        <Routes>
-            <Route path="/" element={<Home isLogged={isLogged} />}>
-          {/* <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="dashboard" element={<Dashboard />} /> */}
-          {/* <Route path="*" element={<NoMatch />} /> */}
-            </Route>
-        </Routes>
-      </>
-    )
+    //     {/* <Routes>
+    //         <Route path="/" element={<Home isLogged={isLogged} />}> */}
+    //       {/* <Route index element={<Home />} />
+    //       <Route path="about" element={<About />} />
+    //       <Route path="dashboard" element={<Dashboard />} /> */}
+    //       {/* <Route path="*" element={<NoMatch />} /> */}
+    //         {/* </Route>
+    //     </Routes> */}
+
+    //   </>
+    // )
 }
 function Home(isLogged) {
     if (isLogged) {
@@ -87,3 +90,19 @@ function Home(isLogged) {
 //         </>)
 // }
 
+// const Home = async (isLogged, setIsLogged) => {
+//     const [questions, setQuestions] = useState([])
+//     const [answer]
+//     useEffect(() => {
+//         const getQuestions = async() => {
+//             const { data } = await axios.get('/api/questions')
+//             setQuestions(data)
+//         }
+//         getQuestions()
+//     }, [])
+//     return (
+//         <>
+//         {isLogged && questions.map(question => <><p>{question.author, question.questionText, question.answer}</p></>)}
+//         </>
+//     )
+// }
