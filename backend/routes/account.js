@@ -9,8 +9,15 @@ router.post('/signup', async (req, res, next) => {
   const { body } = req
   const { username, password } = body
   try {
-    await User.create({ username, password })
-    res.send('succesful signup')
+    const user = await User.findOne({ username })
+    if (!user) {
+      await User.create({ username, password })
+      req.session.username = username
+      res.send('succesful signup')
+    } else {
+      console.log("hello")
+      res.send('username taken')
+    } 
   } catch (e) {
     next(e)
   }
@@ -36,5 +43,7 @@ router.post('/logout', isAuthenticated, (req, res) => {
   req.session.username = null
   res.send('you logged out')
 })
-
+router.get('/isLogged', (req, res) => {
+  res.json(req.session.username)
+})
 module.exports = router
