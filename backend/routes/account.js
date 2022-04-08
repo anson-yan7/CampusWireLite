@@ -15,9 +15,9 @@ router.post('/signup', async (req, res, next) => {
       req.session.username = username
       res.send('succesful signup')
     } else {
-      console.log("hello")
+      console.log('hello')
       res.send('username taken')
-    } 
+    }
   } catch (e) {
     next(e)
   }

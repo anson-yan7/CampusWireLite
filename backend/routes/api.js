@@ -28,8 +28,6 @@ router.post('/add', isAuthenticated, async (req, res, next) => {
 router.post('/answer', isAuthenticated, async (req, res, next) => {
   const { body } = req
   const { _id, answer } = body
-  console.log(_id)
-  console.log(answer)
   try {
     await Question.updateOne({ _id }, { answer })
     res.send('question answered')
