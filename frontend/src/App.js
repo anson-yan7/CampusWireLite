@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRoutes } from 'react-router-dom'
 import axios from 'axios'
-// import Login from './routes/Login'
 
 export const App = () => {
   const [isLogged, setIsLogged] = useState(false)
